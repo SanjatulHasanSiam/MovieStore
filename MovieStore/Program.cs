@@ -15,6 +15,7 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(
 builder.Services.AddIdentity<ApplicationUsers, IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<IGenreService, GenreService>();
 //builder.Services.ConfigureExternalCookie(options=>options.LoginPath="/UserAuthentication/Login");
 var app = builder.Build();
 
