@@ -16,6 +16,7 @@ builder.Services.AddIdentity<ApplicationUsers, IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IFileService, FileService>();
 //builder.Services.ConfigureExternalCookie(options=>options.LoginPath="/UserAuthentication/Login");
 var app = builder.Build();
 
