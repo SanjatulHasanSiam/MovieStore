@@ -28,17 +28,17 @@
             @*@if (User.IsInRole("Admin"))*@
             @if (!string.IsNullOrEmpty(username))
             {
-                <li>
-                    <a href="#">Admin <i class="fa fa-caret-down"></i></a>
-
-                    <ul class="dropdown-nav-link">
-                        <li><a asp-controller="Genre" asp-action="Add">Genre</a></li>
-                        <li><a href="#">Movie</a></li>
-                        <li><a asp-controller="UserAuthentication" asp-action="Logout">Logout</a></li>
-                    </ul>
-                </li>
+               
             }
-            
+            <li>
+                <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+
+                <ul class="dropdown-nav-link">
+                    <li><a asp-controller="Genre" asp-action="Add">Genre</a></li>
+                    <li><a href="#">Movie</a></li>
+                    <li><a asp-controller="UserAuthentication" asp-action="Logout">Logout</a></li>
+                </ul>
+            </li>
             @if (string.IsNullOrEmpty(username))
             {
                 <li><a asp-controller="UserAuthentication" asp-action="Login">Login</a></li>
