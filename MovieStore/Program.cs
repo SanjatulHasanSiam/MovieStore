@@ -17,6 +17,7 @@ builder.Services.AddIdentity<ApplicationUsers, IdentityRole>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 //builder.Services.ConfigureExternalCookie(options=>options.LoginPath="/UserAuthentication/Login");
 var app = builder.Build();
 
