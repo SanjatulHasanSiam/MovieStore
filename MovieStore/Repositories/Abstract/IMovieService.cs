@@ -9,7 +9,7 @@ namespace MovieStore.Repositories.Abstract
         bool Update(Movie model);
         Movie GetById(int id);
         bool Delete(int id);
-        MovieListVM List(string term = "");
+        MovieListVM List(string term = "", bool paging = false, int currentPage = 0);
         List<int> GetGenreByMovieId(int movieId);
 
 
