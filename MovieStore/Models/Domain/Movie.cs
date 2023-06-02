@@ -26,5 +26,7 @@ namespace MovieStore.Models.Domain
         public IEnumerable<SelectListItem>? GenreList { get; set; }
         [NotMapped]
         public string? GenreNames { get; set; }
+        [NotMapped]
+        public MultiSelectList ?MultiGenreList { get; set; }
     }
 }

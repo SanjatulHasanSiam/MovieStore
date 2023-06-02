@@ -40,6 +40,11 @@ namespace MovieStore.Repositories.Implementation
             {
                 var data = this.GetById(id);
                 if (data == null) return false;
+                var movieGenres = ctx.MovieGenre.Where(x => x.MovieId == data.Id);
+                foreach(var movieGenre in movieGenres)
+                {
+                    ctx.MovieGenre.Remove(movieGenre);
+                }
                 ctx.Movie.Remove(data);
                 ctx.SaveChanges();
                 return true;
@@ -78,7 +83,26 @@ namespace MovieStore.Repositories.Implementation
         {
             try
             {
+
+                // these genreIds are not selected by users and still present is movieGenre table corresponding to
+                // this movieId. So these ids should be removed.
+                var genresToDeleted = ctx.MovieGenre.Where(a => a.MovieId == model.Id && !model.Genres.Contains(a.GenreId)).ToList();
+                foreach (var mGenre in genresToDeleted)
+                {
+                    ctx.MovieGenre.Remove(mGenre);
+                }
+                foreach (int genId in model.Genres)
+                {
+                    var movieGenre = ctx.MovieGenre.FirstOrDefault(a => a.MovieId == model.Id && a.GenreId == genId);
+                    if (movieGenre == null)
+                    {
+                        movieGenre = new MovieGenre { GenreId = genId, MovieId = model.Id };
+                        ctx.MovieGenre.Add(movieGenre);
+                    }
+                }
+
                 ctx.Movie.Update(model);
+                // we have to add these genre ids in movieGenre table
                 ctx.SaveChanges();
                 return true;
             }
@@ -86,6 +110,13 @@ namespace MovieStore.Repositories.Implementation
             {
                 return false;
             }
+        }
+
+
+        public List<int> GetGenreByMovieId(int movieId)
+        {
+            var genreIds = ctx.MovieGenre.Where(a => a.MovieId == movieId).Select(a => a.GenreId).ToList();
+            return genreIds;
         }
     }
 }
