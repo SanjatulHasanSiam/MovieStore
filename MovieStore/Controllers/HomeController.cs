@@ -10,9 +10,9 @@ namespace MovieStore.Controllers
         {
             _movieService = movieService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string term="")
         {
-            var movies=_movieService.List();
+            var movies=_movieService.List(term);
             return View(movies);
         }
         public IActionResult About()
